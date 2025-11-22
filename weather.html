@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'sky-blue': '#4a90e2',
+                        'dark-slate': '#2c3e50',
+                        'cloud-light': '#ecf0f1',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Apply smooth transitions to key elements */
+        .weather-card {
+            transition: all 0.5s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        /* Style for the search button on hover/active */
+        #search-button:hover {
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+            transform: translateY(-2px);
+        }
+        #search-button:active {
+            transform: translateY(0);
+        }
+    </style>
+
+</head>
+<body class="bg-gradient-to-br from-sky-blue to-blue-600 min-h-screen flex items-center justify-center p-4 font-sans">
+
+<div id="app-container" class="weather-card bg-white w-full max-w-lg mx-auto rounded-3xl shadow-2xl p-8 transform hover:shadow-3xl">
+
+    <!-- Header -->
+    <h1 class="text-4xl font-bold text-dark-slate mb-6 text-center">
+        SkyViewer 🌤️
+    </h1>
+
+    <!-- Search Form -->
+    <div class="flex flex-col sm:flex-row gap-3 mb-8">
+        <input type="text" id="city-input" placeholder="Enter city name (e.g., London)"
+               class="flex-grow p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-sky-blue transition duration-300"
+               aria-label="City Input">
+        <button id="search-button"
+                class="bg-sky-blue text-white p-3 rounded-xl font-semibold shadow-md hover:bg-blue-700 transition duration-300 transform">
+            Get Weather
+        </button>
+    </div>
+
+    <!-- Status Message Area (Loading / Error) -->
+    <div id="message-area" class="text-center p-3 rounded-xl mb-6 text-dark-slate font-medium hidden">
+        <!-- Messages displayed here -->
+    </div>
+
+    <!-- Weather Results Card (Initially hidden) -->
+    <div id="weather-display" class="hidden bg-cloud-light p-6 rounded-2xl shadow-inner border border-gray-200">
+
+        <!-- Main Temperature and City -->
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <div>
+                <h2 id="city-name" class="text-3xl font-bold text-dark-slate"></h2>
+                <p id="weather-description" class="text-lg text-gray-600 capitalize"></p>
+            </div>
+            <div class="text-6xl font-extrabold text-sky-blue">
+                <span id="temperature-main">--</span>
+                <span class="text-4xl align-top">°C</span>
+            </div>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="grid grid-cols-2 gap-4 text-dark-slate">
+
+            <!-- Humidity -->
+            <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                <span class="text-xl mr-3">💧</span>
+                <div>
+                    <p class="text-sm font-light">Humidity</p>
+                    <p id="humidity-value" class="font-semibold">--</p>
+                </div>
+            </div>
+            <!-- Wind Speed -->
+            <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                <span class="text-xl mr-3">💨</span>
+                <div>
+                    <p class="text-sm font-light">Wind Speed</p>
+                    <p id="wind-speed-value" class="font-semibold">--</p>
+                </div>
+            </div>
+
+            <!-- Max Temp -->
+            <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                <span class="text-xl mr-3">🔥</span>
+                <div>
+                    <p class="text-sm font-light">Max Temp</p>
+                    <p id="temp-max-value" class="font-semibold">--</p>
+                </div>
+            </div>
+
+            <!-- Min Temp -->
+            <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                <span class="text-xl mr-3">🥶</span>
+                <div>
+                    <p class="text-sm font-light">Min Temp</p>
+                    <p id="temp-min-value" class="font-semibold">--</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
